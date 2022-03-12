@@ -1,2 +1,2 @@
-# -commander-js-demo
+# commander-js-demo
  commander.js practice
