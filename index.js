@@ -1,6 +1,8 @@
-const { Command } = require('commander');
-const Metalsmith = require('metalsmith');
+const ora = require('ora')
 const path = require('path')
+const { promisify } = require('util')
+const { Command } = require('commander');
+const download = require('download-git-repo')
 const program = new Command();
 
 function defaultValue() {
@@ -13,6 +15,19 @@ function collect(value, previous) {
 
 function myParseInt(value) {
   return Number(value)
+}
+
+const clone = async function (repo, desc) {
+  const downloads = promisify(download) // download-git-repo: Download and extract a git repository (GitHub, GitLab, Bitbucket)
+  const process = ora(`cloning => ${repo}`)
+
+  process.start() // 进度条开始
+  await downloads(repo, desc)
+  //  download-git-repo导出的download方法，第一个参数repo是仓库地址，格式有三种：
+  // GitHub - github:owner/name or simply owner/name
+  // GitLab - gitlab:owner/name
+  // Bitbucket - bitbucket:owner/name
+  process.succeed()
 }
 
 program
@@ -34,6 +49,13 @@ program
   .argument('[second]', 'number argument', myParseInt, 10)
   .action((first, second) => {
     console.log(`first: ${first}, second: ${second}: ${first + second}`)
+  })
+
+program
+  .command('create')
+  .argument('<name>', 'string argument')
+  .action((name) => {
+    clone('github:cleves0315/chrome-extension-cli', `${name}`)
   })
 
 program.version('0.0.1', '-v --vers', 'output the current version');
