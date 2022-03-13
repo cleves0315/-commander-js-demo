@@ -1,4 +1,6 @@
 const { Command } = require('commander');
+const Metalsmith = require('metalsmith');
+const path = require('path')
 const program = new Command();
 
 function defaultValue() {
