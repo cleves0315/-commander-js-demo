@@ -1,5 +1,6 @@
+#!/usr/bin/env node
+
 const ora = require('ora')
-const path = require('path')
 const { promisify } = require('util')
 const { Command } = require('commander');
 const download = require('download-git-repo')

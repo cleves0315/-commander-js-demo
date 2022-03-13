@@ -1,6 +1,6 @@
 {
   "name": "commander-js-demo",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "commander.js practice",
   "main": "index.js",
   "scripts": {
@@ -17,7 +17,7 @@
     "url": "https://github.com/cleves0315/commander-js-demo/issues"
   },
   "bin": {
-    "yayo": "./index.js"
+    "commander-js-demo": "./index.js"
   },
   "homepage": "https://github.com/cleves0315/commander-js-demo#readme",
   "dependencies": {
